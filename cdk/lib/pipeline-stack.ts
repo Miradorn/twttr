@@ -40,6 +40,9 @@ export class PipelineStack extends Stack {
         sourceArtifact,
         cloudAssemblyArtifact,
         subdirectory: 'cdk',
+        environment: {
+          buildImage: Codebuild.LinuxBuildImage.STANDARD_5_0,
+        }
 
         // Use this if you need a build step (if you're not using ts-node
         // or if you have TypeScript Lambdas that need to be compiled).
