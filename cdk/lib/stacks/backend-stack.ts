@@ -64,17 +64,17 @@ export class BackendStack extends Stack {
 
     const handlerDir = path.resolve(__dirname, '..', '..', '..', 'backend', 'src', 'handlers')
 
-    const listPostsHandler = new LambdaFunction(this, 'ListPostsHandler', {
-      entry: path.join(handlerDir, 'posts', 'list.ts'),
-    })
+    // const listPostsHandler = new LambdaFunction(this, 'ListPostsHandler', {
+    //   entry: path.join(handlerDir, 'posts', 'list.ts'),
+    // })
 
-    const listPostsIntegration = new LambdaProxyIntegration({handler: listPostsHandler.lambdaFunction})
+    // const listPostsIntegration = new LambdaProxyIntegration({handler: listPostsHandler.lambdaFunction})
 
-    this.api.addRoutes({
-      path: '/posts',
-      methods: [HttpMethod.GET],
-      integration: listPostsIntegration
-    })
+    // this.api.addRoutes({
+    //   path: '/posts',
+    //   methods: [HttpMethod.GET],
+    //   integration: listPostsIntegration
+    // })
 
   }
 }
