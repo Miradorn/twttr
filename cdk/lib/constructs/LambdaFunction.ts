@@ -22,7 +22,7 @@ export class LambdaFunction extends Construct {
       handler: props.handler,
       runtime: props.runtime ?? Runtime.NODEJS_14_X,
       tracing: Tracing.ACTIVE,
-      bundling: props.bundlingOptions,
+      bundling: {forceDockerBundling: true, ...props.bundlingOptions},
       layers: [this.getOrCreateLambdaInsightsLayer()],
     })
 
