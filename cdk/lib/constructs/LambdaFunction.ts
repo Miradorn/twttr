@@ -17,18 +17,18 @@ export class LambdaFunction extends Construct {
   constructor(scope: Construct, id: string, props: LambdaFunctionProps) {
     super(scope, id)
 
-    // this.lambdaFunction = new NodejsFunction(this, 'Resource', {
-    //   entry: props.entry,
-    //   handler: props.handler,
-    //   runtime: props.runtime ?? Runtime.NODEJS_14_X,
-    //   tracing: Tracing.ACTIVE,
-    //   bundling: props.bundlingOptions,
-    //   layers: [this.getOrCreateLambdaInsightsLayer()],
-    // })
+    this.lambdaFunction = new NodejsFunction(this, 'Resource', {
+      entry: props.entry,
+      handler: props.handler,
+      runtime: props.runtime ?? Runtime.NODEJS_14_X,
+      tracing: Tracing.ACTIVE,
+      bundling: props.bundlingOptions,
+      layers: [this.getOrCreateLambdaInsightsLayer()],
+    })
 
-    // this.lambdaFunction.role?.addManagedPolicy(
-    //   ManagedPolicy.fromAwsManagedPolicyName('CloudWatchLambdaInsightsExecutionRolePolicy'),
-    // );
+    this.lambdaFunction.role?.addManagedPolicy(
+      ManagedPolicy.fromAwsManagedPolicyName('CloudWatchLambdaInsightsExecutionRolePolicy'),
+    );
   }
 
   public getOrCreateLambdaInsightsLayer() {
