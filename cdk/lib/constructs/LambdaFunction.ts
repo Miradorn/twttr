@@ -4,6 +4,7 @@ import {NodejsFunction, BundlingOptions} from '@aws-cdk/aws-lambda-nodejs'
 import {ManagedPolicy} from '@aws-cdk/aws-iam';
 
 export interface LambdaFunctionProps {
+  tsconfig: string;
   entry: string;
   handler?: string;
   runtime?: Runtime;
@@ -20,9 +21,9 @@ export class LambdaFunction extends Construct {
     this.lambdaFunction = new NodejsFunction(this, 'Resource', {
       entry: props.entry,
       handler: props.handler,
+      bundling: {tsconfig: props.tsconfig },
       runtime: props.runtime ?? Runtime.NODEJS_14_X,
       tracing: Tracing.ACTIVE,
-      bundling: props.bundlingOptions,
       layers: [this.getOrCreateLambdaInsightsLayer()],
     })
 

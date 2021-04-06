@@ -62,19 +62,21 @@ export class BackendStack extends Stack {
       target: route53.RecordTarget.fromAlias(new ApiGatewayv2Domain(apiDomainName))
     })
 
-    const handlerDir = path.resolve(__dirname, '..', '..', '..', 'backend', 'src', 'handlers')
+    const basepath = path.resolve(__dirname, '..', '..', '..', 'backend')
+    const handlerDir = path.join(basepath, 'src', 'handlers')
+    const tsconfig = path.join(basepath, 'tsconfig.json')
 
     const listPostsHandler = new LambdaFunction(this, 'ListPostsHandler', {
       entry: path.join(handlerDir, 'posts', 'list.ts'),
+      tsconfig
     })
 
-    // const listPostsIntegration = new LambdaProxyIntegration({handler: listPostsHandler.lambdaFunction})
+    const listPostsIntegration = new LambdaProxyIntegration({handler: listPostsHandler.lambdaFunction})
 
-    // this.api.addRoutes({
-    //   path: '/posts',
-    //   methods: [HttpMethod.GET],
-    //   integration: listPostsIntegration
-    // })
-
+    this.api.addRoutes({
+      path: '/posts',
+      methods: [HttpMethod.GET],
+      integration: listPostsIntegration
+    })
   }
 }
