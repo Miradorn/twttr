@@ -71,8 +71,8 @@ export class PipelineStack extends Stack {
         buildAndDeployStage.nextSequentialRunOrder()
       )
     );
-
   }
+
   private buildAction(
     sourceArtifact: Codepipeline.Artifact,
     buildArtifact: Codepipeline.Artifact,
@@ -109,5 +109,4 @@ export class PipelineStack extends Stack {
       bucket: bucket,
     });
   }
-
 }
