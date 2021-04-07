@@ -57,6 +57,7 @@ export class BackendStack extends Stack {
     })
 
     new route53.ARecord(this, 'ARecord', {
+      recordName: 'api.twttr.alst.superluminar.io',
       zone,
       target: route53.RecordTarget.fromAlias(new ApiGatewayv2Domain(apiDomainName))
     })
