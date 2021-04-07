@@ -51,7 +51,7 @@ export class BackendStack extends Stack {
       },
       corsPreflight: {
         allowHeaders: ['Authorization'],
-        allowMethods: [CorsHttpMethod.GET, CorsHttpMethod.HEAD, CorsHttpMethod.OPTIONS, CorsHttpMethod.POST],
+        allowMethods: [CorsHttpMethod.ANY],
         allowOrigins: [`https://${props.frontendDomainName}`],
         maxAge: Duration.days(10),
       },
