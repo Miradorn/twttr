@@ -3,7 +3,7 @@ import {HttpApi, HttpMethod, DomainName, CorsHttpMethod} from '@aws-cdk/aws-apig
 import {LambdaProxyIntegration} from '@aws-cdk/aws-apigatewayv2-integrations'
 import * as route53 from "@aws-cdk/aws-route53";
 import {ApiGatewayv2Domain} from "@aws-cdk/aws-route53-targets";
-import {DnsValidatedCertificate} from "@aws-cdk/aws-certificatemanager";
+import {Certificate, CertificateValidation} from "@aws-cdk/aws-certificatemanager";
 
 import {LambdaFunction} from '../constructs/LambdaFunction'
 
@@ -33,10 +33,9 @@ export class BackendStack extends Stack {
       }
     );
 
-    const certificate = new DnsValidatedCertificate(this, "FrontendCert", {
+    const certificate = new Certificate(this, "FrontendCert", {
       domainName: this.domainName,
-      region: "us-east-1",
-      hostedZone: zone,
+      validation: CertificateValidation.fromDns(zone)
     });
 
     const apiDomainName = new DomainName(this, 'DomainName', {
